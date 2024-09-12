@@ -7,7 +7,7 @@ const SingleProduct = () => {
   const { id } = useParams();
 
   useEffect(() => {
-    fetch(`https://dummyjson.com/products/${id}`)
+    fetch(`https://fakestoreapi.com/products/${id}`)
       .then((res) => res.json())
       .then((res) => {
         console.log(res);
@@ -19,31 +19,23 @@ const SingleProduct = () => {
   }, [id]);
 
   return (
-    <div className="container mt-5">
-      <div className="row">
-        <div className="col-md-6 offset-md-3">
-          {data ? (
-            <div className="card mb-3">
-              <img
-                src={data.images[0]}
-                className="card-img-top"
-                alt={data.title}
-              />
-              <div className="card-body">
-                <h1 className="card-title">{data.title}</h1>
-                <p className="card-text">{data.description}</p>
-                <p className="card-text">Price: {data.price}</p>
-                <button className="btn btn-primary">Buy</button>
-                {/* Add more properties as needed */}
-              </div>
+    <>
+    <div>Product # {id}</div>
+    <div className='flex justify-center align-middle ml-7 shadow-xl' style={{
+        border:"2px solid black",
+        borderRadius:"20px",
+        width:"360px"
+    }}>
+        {data ? (
+            <div className=''>
+                <img className='relative left-[76px]' width={"160"} src={data.image} alt="" />
+            <h1 className='pl-2'>Category:{data.category}</h1>
+            <p className='pl-2 font-semibold'>Description:{data.description}</p>
+            <p className='pl-2 font-bold'>Price:{data.price}</p>
             </div>
-          ) : (
-            <h1 className="text-center">Loading...</h1>
-          )}
-        </div>
-      </div>
+        ): <h1>Loading...</h1>}
     </div>
-  );
-};
-
+    </>
+    )
+  }
 export default SingleProduct;
